@@ -1,0 +1,12 @@
+# terraform
+.terraform
+terraform
+terraform.tfstate
+terraform.tfstate.backup
+
+# ssh
+.ssh
+
+# mac
+.DS_Store
+

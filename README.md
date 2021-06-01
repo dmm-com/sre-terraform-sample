@@ -1,1 +1,40 @@
-# terraform-sample
+# 本研修を実施する前に行うこと
+## .sshの設置
+ご自身の公開鍵を事前にプロジェクトディレクトの以下に配置してください。
+id_rsa.pub
+
+## VPCに対してNameの設定
+Terraformから参照可能になるように利用するVPCに対してvpcとうNameを設定してください
+# EC2サーバにSSHしたい方
+
+`~/.ssh/config`に以下の記述を行いSSHでログインすることができます
+
+```
+Host bastion
+  HostName <踏み台サーバのパブリックIP>
+  User ec2-user
+  IdentityFile ~/.ssh/id_rsa
+  StrictHostKeyChecking no
+  IdentitiesOnly yes
+
+Host web1
+  HostName <webサーバ#1のパブリックIP>
+  User ec2-user
+  ProxyCommand ssh -W %h:%p bastion
+  StrictHostKeyChecking no
+  IdentitiesOnly yes
+
+Host web2
+  HostName <webサーバ#2のパブリックIP>
+  User ec2-user
+  ProxyCommand ssh -W %h:%p bastion
+  StrictHostKeyChecking no
+  IdentitiesOnly yes
+```
+
+* 接続方法
+```
+ssh web1
+または
+ssh web2
+```
