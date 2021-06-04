@@ -4,6 +4,10 @@ data "aws_vpc" "vpc" {
     name   = "tag:Name"
     values = ["vpc"] # 事前に対象のサブネット（10.1.0.0/24?）に名前を設定してください
   }
+  /*
+  こういうやり方もありです
+  id = "vpc-074401f847d4833fa"
+  */
 }
 
 data "aws_subnet_ids" "public" {
