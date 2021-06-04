@@ -40,14 +40,14 @@ Host bastion
   IdentitiesOnly yes
 
 Host web1
-  HostName <webサーバ#1のパブリックIP>
+  HostName <webサーバ#1のプライベートIP>
   User ec2-user
   ProxyCommand ssh -W %h:%p bastion
   StrictHostKeyChecking no
   IdentitiesOnly yes
 
 Host web2
-  HostName <webサーバ#2のパブリックIP>
+  HostName <webサーバ#2のプライベートIP>
   User ec2-user
   ProxyCommand ssh -W %h:%p bastion
   StrictHostKeyChecking no
