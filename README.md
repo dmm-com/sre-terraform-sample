@@ -3,7 +3,15 @@
 ご自身の公開鍵を事前にプロジェクトディレクトリの以下に配置してください。
 id_rsa.pub
 
-## VPCに対してNameの設定
+# ルール
+* case1_system.png　をみて同等構成をTerraformのコードで作成してください。
+* ただしVPC,Subnet,NatGateWay,InternatGatewayはコンソールで作成してもIaCでもどちらでも構いません（自分の理解度、チャレンジ意欲で判断してください。後からIaC化もあり）
+
+# サンプルコードをご利用になる方へ
+* VPCにvpcというNameを設定してください
+* パブリックサブネットにpublic-aやpublic-bといったNameを設定してください
+* プライベートサブネットにprivate-aやprivate-bといったNameを設定してください
+
 Terraformから参照可能になるように利用するVPCに対してNameを設定してください
 # EC2サーバにSSHしたい方
 
