@@ -7,10 +7,24 @@
 ご自身の公開鍵を事前にプロジェクトディレクトリの以下に配置してください。
 .ssh/id_rsa.pub
 
+# 作成順序(一例)
+* vpc(data)
+* subnet(data)
+* natgateway
+* internetgateway
+* rute_table
+* security_group
+* ami(data)
+* keypair(ec2へ)
+* ec2/eip
+* alb
+* rds
+
 # サンプルコードをご利用になる方へ
 * VPCにvpcというNameを設定してください
 * パブリックサブネットにpublic-aやpublic-bといったNameを設定してください
 * プライベートサブネットにprivate-aやprivate-bといったNameを設定してください
+* サンプルコードはnatgatewayを作成しています
 
 Terraformから参照可能になるように利用するVPCに対してNameを設定してください
 # EC2サーバにSSHしたい方
