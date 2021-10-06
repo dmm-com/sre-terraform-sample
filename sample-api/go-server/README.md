@@ -1,6 +1,11 @@
 # Go API Server for openapi
 
 This is sample.
+DB接続して接続できたらOKを返すだけのapi。
+```
+curl http://localhost:8080/ping
+"OK" or "DB接続失敗"
+```
 
 ## Overview
 openapi-generatorで初期構築しています。
