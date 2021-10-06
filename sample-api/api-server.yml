@@ -1,0 +1,22 @@
+openapi: 3.0.2
+
+info:
+  title: "sample API"
+  description: "This is sample."
+  version: "1.0.0"
+
+paths:
+  /ping:
+    get:
+      description: ping
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "OK"
