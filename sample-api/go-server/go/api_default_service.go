@@ -12,8 +12,6 @@ package openapi
 import (
 	"context"
 	"net/http"
-//        "errors"
-//        "fmt"
 )
 
 // DefaultApiService is a service that implements the logic for the DefaultApiServicer
@@ -31,13 +29,7 @@ func NewDefaultApiService() DefaultApiServicer {
 func (s *DefaultApiService) PingGet(ctx context.Context) (ImplResponse, error) {
 	// TODO - update PingGet with the required logic for this service method.
 	// Add api_default_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-         err := SqlConnect()
-   //      if err != nil {
-    //       fmt.Println(err.Error())
-   //        err := errors.New("DB接続失敗")
-    //     } else {
-    //       fmt.Println("DB接続成功")
-    //     }
+        err := SqlConnect()
 
         return Response(http.StatusNotImplemented, "OK"), err
 }
