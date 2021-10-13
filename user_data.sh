@@ -1,7 +1,9 @@
 #!/bin/bash
 
-curl -o /usr/local/bin/jq -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
-chmod +x /usr/local/bin/jq
+if [ ! -f /usr/local/bin/jq ]; then
+  curl -o /usr/local/bin/jq -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+  chmod +x /usr/local/bin/jq
+fi
 
 SETENV_SHELL="/etc/profile.d/setenv.sh"
 
@@ -19,6 +21,7 @@ cat > "${SETENV_SHELL}" <<EOF
 export INSTANCE_ID=${INSTANCE_ID}
 export REGION=${REGION}
 export ZONE=${ZONE}
+export PATH=$PATH:/usr/local/go/bin
 EOF
 
 for PARAMS in $(echo ${SSM_PARAMETER_STORE} | /usr/local/bin/jq -r '.Parameters[] | .Name + "=" + .Value'); do
@@ -27,3 +30,13 @@ done >> "${SETENV_SHELL}"
 
 chmod +x "$SETENV_SHELL"
 source "$SETENV_SHELL"
+
+if [ ! -f /usr/local/go/bin/go ]; then
+  wget https://dl.google.com/go/go1.15.15.linux-amd64.tar.gz
+  sudo tar -C /usr/local -xzf go1.15.15.linux-amd64.tar.gz
+fi
+
+###
+#どっかからとってきて
+###
+sudo go run main.go
