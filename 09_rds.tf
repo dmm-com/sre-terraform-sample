@@ -10,9 +10,9 @@ resource "aws_rds_cluster" "rds" {
   vpc_security_group_ids          = [aws_security_group.rds.id]
   engine_version                  = "5.7.mysql_aurora.2.03.2"
   db_subnet_group_name            = aws_db_subnet_group.rds.name
-  database_name                   = "mydb"
-  master_username                 = "root"
-  master_password                 = "root12345" # 研修なので直接記載しているが本来パスワードは別から取得するべき
+  database_name                   = var.database_name
+  master_username                 = var.master_username
+  master_password                 = random_password.password.result # 研修なので直接記載しているが本来パスワードは別から取得するべき
   backup_retention_period         = 5
   preferred_backup_window         = "07:00-09:00" # UTC表記
   skip_final_snapshot             = true
