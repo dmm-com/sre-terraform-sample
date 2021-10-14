@@ -6,7 +6,8 @@ data "aws_availability_zones" "zone" {
 resource "aws_rds_cluster" "rds" {
   cluster_identifier              = "rds"
   engine                          = "aurora-mysql"
-  availability_zones              = ["ap-northeast-1a"] # 人によっては使えない可能性あるのでベタかきdata.aws_availability_zones.zone.names
+  #availability_zones              = ["ap-northeast-1a"] # 人によっては使えない可能性あるのでベタかきdata.aws_availability_zones.zone.names
+  availability_zones              = ["us-east-1a"] # 人によっては使えない可能性あるのでベタかきdata.aws_availability_zones.zone.names
   vpc_security_group_ids          = [aws_security_group.rds.id]
   engine_version                  = "5.7.mysql_aurora.2.03.2"
   db_subnet_group_name            = aws_db_subnet_group.rds.name

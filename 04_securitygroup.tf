@@ -84,7 +84,7 @@ resource "aws_security_group" "ec2_bastion" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["111.108.92.1/32"]
+    cidr_blocks = ["111.108.92.6/32"]
   }
 
   egress {
