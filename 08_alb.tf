@@ -16,7 +16,7 @@ resource "aws_lb_target_group" "ec2_web" {
   vpc_id = data.aws_vpc.vpc.id
 
   target_type = "instance"
-  port        = "80"
+  port        = "8080"
   protocol    = "HTTP"
 
   health_check {
@@ -24,7 +24,7 @@ resource "aws_lb_target_group" "ec2_web" {
     healthy_threshold   = "5"
     interval            = "30"
     matcher             = "200"
-    path                = "/"
+    path                = "/ping"
     port                = "traffic-port"
     protocol            = "HTTP"
     timeout             = "5"
@@ -37,7 +37,7 @@ resource "aws_lb_target_group_attachment" "ec2_web" {
   count            = length(aws_instance.ec2_web)
   target_group_arn = aws_lb_target_group.ec2_web.arn
   target_id        = element(aws_instance.ec2_web, count.index).id
-  port             = 80
+  port             = 8080
 }
 
 
