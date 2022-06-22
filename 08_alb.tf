@@ -3,7 +3,7 @@ resource "aws_lb" "web" {
   name                       = "alb"
   load_balancer_type         = "application"
   security_groups            = [aws_security_group.alb.id]
-  subnets                    = data.aws_subnet_ids.public.ids
+  subnets                    = data.aws_subnets.public.ids
   enable_deletion_protection = false # 本番用途であれば誤って消えないようにtrueを推奨
   enable_http2               = true
   idle_timeout               = "60"

@@ -1,5 +1,5 @@
 resource "aws_eip" "natgateway" {
-  count = length(data.aws_subnet_ids.public.ids)
+  count = length(data.aws_subnets.public.ids)
   vpc   = true
 }
 

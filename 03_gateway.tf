@@ -18,9 +18,9 @@ data "aws_internet_gateway" "default" {
 }
 
 resource "aws_nat_gateway" "nat_gw" {
-  count         = length(data.aws_subnet_ids.public.ids)
+  count         = length(data.aws_subnets.public.ids)
   allocation_id = element(aws_eip.natgateway, count.index).id
-  subnet_id     = sort(data.aws_subnet_ids.public.ids)[count.index] # aws_subnet_idsはSet要素なのでsortでリストに変換
+  subnet_id     = sort(data.aws_subnets.public.ids)[count.index] # aws_subnetsはSet要素なのでsortでリストに変換
   tags = {
     Name = "MyNatGateWay"
   }
@@ -35,7 +35,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table" "private" {
-  count  = length(data.aws_subnet_ids.private.ids)
+  count  = length(data.aws_subnets.private.ids)
   vpc_id = data.aws_vpc.vpc.id
   route {
     cidr_block     = "0.0.0.0/0"
@@ -44,7 +44,7 @@ resource "aws_route_table" "private" {
 }
 
 resource "aws_route_table_association" "private" {
-  count          = length(data.aws_subnet_ids.private.ids)
+  count          = length(data.aws_subnets.private.ids)
   route_table_id = element(aws_route_table.private, count.index).id
-  subnet_id      = sort(data.aws_subnet_ids.private.ids)[count.index]
+  subnet_id      = sort(data.aws_subnets.private.ids)[count.index]
 }

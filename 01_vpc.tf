@@ -10,16 +10,22 @@ data "aws_vpc" "vpc" {
   */
 }
 
-data "aws_subnet_ids" "public" {
-  vpc_id = data.aws_vpc.vpc.id
+data "aws_subnets" "public" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.vpc.id]
+  }
   filter {
     name   = "tag:Name"
     values = ["public-*"] # 実弾演習の初期設定に合わせた名前になっています
   }
 }
 
-data "aws_subnet_ids" "private" {
-  vpc_id = data.aws_vpc.vpc.id
+data "aws_subnets" "private" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.vpc.id]
+  }
   filter {
     name   = "tag:Name"
     values = ["private-*"] # 実弾演習の初期設定に合わせた名前になっています
@@ -42,10 +48,10 @@ resource "aws_route_table_association" "private" {
 
 # 確認用のデバックメッセージ
 output "public_subnet_cidr_blocks" {
-  value = data.aws_subnet_ids.public.ids
+  value = data.aws_subnets.public.ids
 }
 
 # 確認用のデバックメッセージ
 output "private_subnet_cidr_blocks" {
-  value = data.aws_subnet_ids.private.ids
+  value = data.aws_subnets.private.ids
 }
