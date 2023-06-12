@@ -8,7 +8,7 @@ resource "aws_rds_cluster" "rds" {
   engine                          = "aurora-mysql"
   availability_zones              = ["ap-northeast-1a"] # 人によっては使えない可能性あるのでベタかきdata.aws_availability_zones.zone.names
   vpc_security_group_ids          = [aws_security_group.rds.id]
-  engine_version                  = "5.7.mysql_aurora.2.10.2"
+  engine_version                  = "5.7.mysql_aurora.2.11.2"
   db_subnet_group_name            = aws_db_subnet_group.rds.name
   database_name                   = "mydb"
   master_username                 = "root"
@@ -31,7 +31,7 @@ resource "aws_rds_cluster_instance" "write" {
   count               = 1
   identifier          = "db-write-${count.index}"
   engine              = "aurora-mysql"
-  engine_version      = "5.7.mysql_aurora.2.10.2"
+  engine_version      = "5.7.mysql_aurora.2.11.2"
   cluster_identifier  = aws_rds_cluster.rds.id
   instance_class      = "db.r4.large"
   publicly_accessible = false

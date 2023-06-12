@@ -32,5 +32,5 @@ resource "aws_instance" "ec2_bastion" {
 resource "aws_eip" "bastion" {
   count    = local.bastion_units
   instance = element(aws_instance.ec2_bastion, count.index).id
-  vpc      = true
+  domain   = "vpc"
 }
